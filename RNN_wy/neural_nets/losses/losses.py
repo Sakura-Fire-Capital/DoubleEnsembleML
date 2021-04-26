@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 
-from ...utils.testing import is_binary, is_stochastic
+from RNN_wy/neural_nets/utils.testing import is_binary, is_stochastic
 from ..initializers import (
     WeightInitializer,
     ActivationInitializer,
