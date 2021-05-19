@@ -4,6 +4,8 @@ from abc import ABC, abstractmethod
 import numpy as np
 from numpy.linalg import norm
 
+print("  ")
+
 
 class OptimizerBase(ABC):
     def __init__(self, lr, scheduler=None):
