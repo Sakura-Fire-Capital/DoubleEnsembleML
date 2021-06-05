@@ -59,15 +59,17 @@ class MLStrategy(bt.Strategy):
         #     return
 
         if not self.position:
-            if self.data_predicted > 0.5:  # 如果预测明天会涨，就买
+            # 如果预测明天会涨，就买
+            if (self.data_predicted > 0.5) & (self.data_predicted[-1] > 0.5) & (self.data_predicted[-2] > 0.5):
                 # 全仓买入 ('all-in') self.broker.getcash() / self.datas[0].open
-                size = int(1000)
+                size = int(3)
                 # buy order
                 # self.log(f'BUY CREATED - -- Size: {size}, Cash: {self.broker.getcash(): .2f},
                 #          Open: {self.data_open[0]}, Close: {self.data_close[0]}')
                 self.order = self.buy(size=size)
         else:
-            if self.data_predicted < 0.5:  # 如果预测明天会跌，就卖
+            # 如果预测明天会跌，就卖
+            if (self.data_predicted < 0.5) & (self.data_predicted[-1] < 0.5):
                 # sell order
                 self.log(f'SELL CREATED --- Size: {self.position.size}')
                 self.order = self.sell(size=self.position.size)
@@ -100,10 +102,15 @@ data = GenericCSV_TAG(dataname=df,
 cerebro = bt.Cerebro()
 cerebro.adddata(data)  # 将行情数据对象注入引擎
 cerebro.addstrategy(MLStrategy)  # 将策略注入引擎
-cerebro.broker.setcash(10000000.0)  # 设置初始资金
-cerebro.broker.setcommission(commission=0.00000000003)
+cerebro.broker.setcash(10000.0)  # 设置初始资金
+cerebro.broker.setcommission(commission=0.003)
 cerebro.run()
 
 print('最终市值: %.2f' % cerebro.broker.getvalue())
 
-cerebro.plot(style='bar')
+# cerebro.plot(style='bar')
+
+fig = cerebro.plot(style='candlestick')
+show = fig[0][0]
+show.set_size_inches(20, 10)  # 调整大小
+show.savefig("backtest_double_lgr.png", width=16, height=9, dpi=300)
