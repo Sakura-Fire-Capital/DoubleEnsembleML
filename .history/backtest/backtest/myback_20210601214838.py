@@ -87,12 +87,12 @@ class GenericCSV_TAG(bt.feeds.GenericCSVData):
 df = '/Users/zed/AI_Lab/DoubleEnsembleML/src/pred.csv'
 data = GenericCSV_TAG(dataname=df,
                       datetime=0,  # 日期行所在列
-                      open=5,  # 开盘价所在列
-                      high=1,  # 最高价所在列
-                      low=2,  # 最低价所在列
-                      close=3,  # 收盘价价所在列
-                      volume=4,  # 成交量所在列
-                      predicted=21,
+                      open=1,  # 开盘价所在列
+                      high=2,  # 最高价所在列
+                      low=3,  # 最低价所在列
+                      close=4,  # 收盘价价所在列
+                      volume=5,  # 成交量所在列
+                      predicted=9,
                       # 无未平仓量列.(openinterest是期货交易使用的)
                                openinterest=-1,
                                # 日l期格式

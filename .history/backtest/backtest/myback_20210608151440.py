@@ -90,8 +90,8 @@ data = GenericCSV_TAG(dataname=df,
                       open=5,  # 开盘价所在列
                       high=1,  # 最高价所在列
                       low=2,  # 最低价所在列
-                      close=3,  # 收盘价价所在列
-                      volume=4,  # 成交量所在列
+                      close=4,  # 收盘价价所在列
+                      volume=5,  # 成交量所在列
                       predicted=21,
                       # 无未平仓量列.(openinterest是期货交易使用的)
                                openinterest=-1,
