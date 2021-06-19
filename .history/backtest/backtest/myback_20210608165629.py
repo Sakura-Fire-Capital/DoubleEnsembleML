@@ -60,7 +60,7 @@ class MLStrategy(bt.Strategy):
 
         if not self.position:
             # 如果预测明天会涨，就买
-            if (self.data_predicted > 0.5) & (self.data_predicted[-1] > 0.5):
+            if (self.data_predicted > 0.5)  :
                 # 全仓买入 ('all-in') self.broker.getcash() / self.datas[0].open
                 size = int(3)
                 # buy order
@@ -103,7 +103,7 @@ cerebro = bt.Cerebro()
 cerebro.adddata(data)  # 将行情数据对象注入引擎
 cerebro.addstrategy(MLStrategy)  # 将策略注入引擎
 cerebro.broker.setcash(10000.0)  # 设置初始资金
-cerebro.broker.setcommission(commission=0.0003)
+cerebro.broker.setcommission(commission=0.003)
 cerebro.run()
 
 print('最终市值: %.2f' % cerebro.broker.getvalue())
